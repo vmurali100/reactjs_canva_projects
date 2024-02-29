@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function calculateTotal(startNum, num) {
+            let total = 0;
+            let newNos = [];
+            for (i = startNum; i < num; i++) {
+                total += i;
+                if (total <= num) {
+                    newNos.push(i);
+                    if(total === num){
+                        break;
+                    }
+                }
+                else {
+                    startNum++;
+                    let newTotal = calculateTotal(startNum, num);
+                    if (newTotal == num) {
+                        console.log(newNos)
+                        break;
+                    }
+                }
+            }
+            
+            return newNos.reduce((a, b) => a + b);
+        }
+
+        calculateTotal(1, 24)
+    </script>
+</body>
+
+</html>
