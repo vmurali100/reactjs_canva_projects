@@ -4,14 +4,16 @@ import Rectangles from './Rectangles';
 import Circles from './Components/Circles';
 import Lines from './Components/Lines';
 import MyPolygon from './Components/MyPolygon';
+import FlowDiagram from './Components/FlowDiagram';
 
 function App() {
   return (
     <div className="App">
-     <Rectangles/>
+     {/* <Rectangles/>
      <Circles/>
      <Lines/>
-     <MyPolygon/>
+     <MyPolygon/> */}
+     <FlowDiagram/>
     </div>
   );
 }
