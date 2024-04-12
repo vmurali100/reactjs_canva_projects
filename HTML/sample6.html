@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extendable Horizontal Line</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #container {
+    position: relative;
+  }
+
+  #line {
+    position: absolute;
+    width: 200px; /* Initial width */
+    height: 2px;
+    background-color: black;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div id="container">
+  <div id="line"></div>
+</div>
+<script>
+  const line = document.getElementById('line');
+  let isDragging = false;
+  let startOffsetX, startWidth;
+
+  line.addEventListener('mousedown', startDrag);
+
+  function startDrag(e) {
+    if (e.offsetX < 10 || e.offsetX > line.offsetWidth - 10) { // Only start drag if clicked near ends of line
+      isDragging = true;
+      startOffsetX = e.offsetX;
+      startWidth = parseFloat(getComputedStyle(line).width);
+      document.addEventListener('mousemove', drag);
+      document.addEventListener('mouseup', endDrag);
+    }
+  }
+
+  function drag(e) {
+    if (!isDragging) return;
+    
+    const newWidth = startWidth + (e.offsetX - startOffsetX) * 2; // Double the movement for extending on both sides
+
+    // Ensure the line doesn't go too small
+    line.style.width = `${Math.max(newWidth, 20)}px`; // Minimum width
+  }
+
+  function endDrag() {
+    isDragging = false;
+    document.removeEventListener('mousemove', drag);
+    document.removeEventListener('mouseup', endDrag);
+  }
+</script>
+</body>
+</html>

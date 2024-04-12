@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extendable Horizontal Line</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #container {
+    position: relative;
+  }
+
+  #line {
+    position: absolute;
+    width: 100px; /* Initial width */
+    height: 2px;
+    background-color: black;
+    cursor: pointer;
+  }
+
+  .draggable {
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+<div id="container">
+  <div id="line" class="draggable"></div>
+</div>
+<script>
+  const line = document.getElementById('line');
+
+  let isDraggingLeft = false;
+  let isDraggingRight = false;
+  let startXLeft, startYLeft;
+  let startXRight, startYRight;
+
+  line.addEventListener('mousedown', startDragLeft);
+  line.addEventListener('mouseup', endDragLeft);
+  line.addEventListener('mousemove', dragLeft);
+  line.addEventListener('mousedown', startDragRight);
+  line.addEventListener('mouseup', endDragRight);
+  line.addEventListener('mousemove', dragRight);
+
+  function startDragLeft(e) {
+    isDraggingLeft = true;
+    startXLeft = e.clientX - line.getBoundingClientRect().left;
+    startYLeft = e.clientY - line.getBoundingClientRect().top;
+  }
+
+  function endDragLeft() {
+    isDraggingLeft = false;
+  }
+
+  function dragLeft(e) {
+    if (!isDraggingLeft) return;
+
+    const newX = e.clientX - startXLeft - line.parentElement.getBoundingClientRect().left;
+    const newY = e.clientY - startYLeft - line.parentElement.getBoundingClientRect().top;
+
+    line.style.width = `${parseInt(line.style.width) + (line.getBoundingClientRect().left - e.clientX)}px`;
+    line.style.left = `${newX}px`;
+    line.style.top = `${newY}px`;
+  }
+
+  function startDragRight(e) {
+    isDraggingRight = true;
+    startXRight = e.clientX - line.getBoundingClientRect().right;
+    startYRight = e.clientY - line.getBoundingClientRect().top;
+  }
+
+  function endDragRight() {
+    isDraggingRight = false;
+  }
+
+  function dragRight(e) {
+    if (!isDraggingRight) return;
+
+    const newX = e.clientX - startXRight - line.parentElement.getBoundingClientRect().left;
+    const newY = e.clientY - startYRight - line.parentElement.getBoundingClientRect().top;
+
+    line.style.width = `${parseInt(line.style.width) - (e.clientX - line.getBoundingClientRect().right)}px`;
+    line.style.top = `${newY}px`;
+  }
+</script>
+</body>
+</html>
