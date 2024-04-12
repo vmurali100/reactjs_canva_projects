@@ -1,21 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
-import Rectangles from './Rectangles';
-import Circles from './Components/Circles';
-import Lines from './Components/Lines';
-import MyPolygon from './Components/MyPolygon';
-import FlowDiagram from './Components/FlowDiagram';
+import React from 'react'
+import OneRect from './Components/OneRect'
+import ConnectableRectangles from './CRectangles'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-     {/* <Rectangles/>
-     <Circles/>
-     <Lines/>
-     <MyPolygon/> */}
-     <FlowDiagram/>
+    <div>
+      {/* <ConnectableRectangles/> */}
+      <OneRect/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

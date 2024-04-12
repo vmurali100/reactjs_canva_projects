@@ -1,0 +1,23 @@
+.rectangle {
+    width: 200px;
+    height: 100px;
+    margin: 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+  }
+  
+  .rectangle-one {
+    background-color: #f0f0f0;
+  }
+  
+  .rectangle-two {
+    background-color: #90ee90;
+  }
+  .connector {
+    position: absolute;
+    width: 2px;
+    height: 0;
+    background-color: black;
+    /* Initially hidden */
+    opacity: 0;
+  }

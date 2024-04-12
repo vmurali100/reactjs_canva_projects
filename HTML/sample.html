@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script src="https://unpkg.com/konva@9/konva.min.js"></script>
+    <script>
+        // Create a Konva stage
+        const width = 900;
+        const height = 900;
+        const stage = new Konva.Stage({
+            container: 'container', // Replace with your container element ID
+            width,
+            height,
+        });
+
+        // Define rectangle properties
+        const rect1 = new Konva.Rect({
+            x: 100,
+            y: 100,
+            width: 100,
+            height: 100,
+            fill: 'red',
+            draggable: true,
+        });
+
+        const rect2 = new Konva.Rect({
+            x: 300,
+            y: 100,
+            width: 100,
+            height: 100,
+            fill: 'blue',
+            draggable: true,
+        });
+
+        // Define initial arrow line (adjusted for end-to-start connection)
+        const arrow = new Konva.Arrow({
+            points: [
+                rect1.x() + rect1.width(), rect1.y() + rect1.height() / 2, // Start from bottom-right corner of rect1
+                rect2.x(), rect2.y() + rect2.height() / 2, // End at top-left corner of rect2
+            ],
+            strokeWidth: 2,
+            stroke: 'black',
+            headWidth: 10,
+            headLength: 10,
+        });
+
+        // Add shapes to the layer and stage
+        const layer = new Konva.Layer();
+        layer.add(rect1, rect2, arrow);
+        stage.add(layer);
+
+        // Update arrow line on rectangle drag
+        const updateArrow = () => {
+            arrow.points([
+                rect1.x() + rect1.width(), rect1.y() + rect1.height() / 2,
+                rect2.x(), rect2.y() + rect2.height() / 2,
+            ]);
+            layer.draw();
+        };
+
+        rect1.on('dragmove', updateArrow);
+        rect2.on('dragmove', updateArrow);
+
+        // Render the stage initially
+        layer.draw();
+    </script>
+</body>
+
+</html>

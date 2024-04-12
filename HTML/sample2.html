@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script src="https://unpkg.com/konva@9/konva.min.js"></script>
+    <script>
+       const width = 100;
+const height = 50;
+const arrowSize = 10;
+const spacing = 50; // Space between rectangles
+
+// Konva stage and layer setup
+const stage = new Konva.Stage({
+  container: 'container', // Replace 'container' with your container element id
+  width: width * 2 + spacing + arrowSize * 2,
+  height: height,
+});
+
+const layer = new Konva.Layer();
+stage.add(layer);
+
+// Create first rectangle
+const rect1 = new Konva.Rect({
+  x: 0,
+  y: 0,
+  width: width,
+  height: height,
+  fill: 'lightblue',
+  stroke: 'black',
+  strokeWidth: 2,
+});
+layer.add(rect1);
+
+// Create second rectangle
+const rect2 = new Konva.Rect({
+  x: width + spacing,
+  y: 0,
+  width: width,
+  height: height,
+  fill: 'lightgreen',
+  stroke: 'black',
+  strokeWidth: 2,
+});
+layer.add(rect2);
+
+// Arrowhead function (similar to previous example)
+function createArrowhead(x, y, direction) {
+  const points = [0, 0, arrowSize, arrowSize / 2];
+
+  if (direction === 1) {
+    points.push(arrowSize, 0); // Right arrow
+  } else {
+    points.push(arrowSize / 2, 0); // Default (right arrow)
+  }
+
+  const arrow = new Konva.Line({
+    points: points,
+    rotation: direction * 90,
+    x: x,
+    y: y,
+    fill: 'black',
+    stroke: 'black',
+  });
+  return arrow;
+}
+
+// Calculate arrow position
+const arrowX = width + spacing / 2 + arrowSize;
+const arrowY = height / 2;
+
+// Create arrow
+const arrow = createArrowhead(arrowX, arrowY, 1); // Right arrow pointing from first to second rectangle
+
+// Add arrow to layer
+layer.add(arrow);
+
+layer.draw();
+
+    </script>
+</body>
+
+</html>
