@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script src="https://unpkg.com/konva@9/konva.min.js"></script>
+    <script>
+        // Create a Konva stage
+        const width = 900;
+        const height = 900;
+        const stage = new Konva.Stage({
+            container: 'container', // Replace with your container element ID
+            width,
+            height,
+        });
+
+        // Define rectangle properties
+        const singleRect = new Konva.Rect({
+            x: 100,
+            y: 100,
+            width: 100,
+            height: 100,
+            fill: 'red',
+            draggable: true,
+        });
+
+        const multiRects = [
+            new Konva.Rect({
+                x: 300,
+                y: 50,
+                width: 100,
+                height: 100,
+                fill: 'blue',
+                draggable: true,
+            }),
+            new Konva.Rect({
+                x: 300,
+                y: 200,
+                width: 100,
+                height: 100,
+                fill: 'green',
+                draggable: true,
+            }),
+            new Konva.Rect({
+                x: 300,
+                y: 350,
+                width: 100,
+                height: 100,
+                fill: 'yellow',
+                draggable: true,
+            }),
+        ];
+
+        // Define initial arrow lines (adjusted for end-to-start connection)
+        const arrows = multiRects.map((rect) => {
+            return new Konva.Arrow({
+                points: [
+                    singleRect.x() + singleRect.width(), singleRect.y() + singleRect.height() / 2, // Start from bottom-right corner of singleRect
+                    rect.x(), rect.y() + rect.height() / 2, // End at top-left corner of rect
+                ],
+                strokeWidth: 2,
+                stroke: 'black',
+                headWidth: 10,
+                headLength: 10,
+            });
+        });
+
+        // Add shapes to the layer and stage
+        const layer = new Konva.Layer();
+        layer.add(singleRect, ...multiRects, ...arrows);
+        stage.add(layer);
+
+        // Update arrow lines on rectangle drag
+        const updateArrows = () => {
+            arrows.forEach((arrow, index) => {
+                arrow.points([
+                    singleRect.x() + singleRect.width(), singleRect.y() + singleRect.height() / 2,
+                    multiRects[index].x(), multiRects[index].y() + multiRects[index].height() / 2,
+                ]);
+            });
+            layer.draw();
+        };
+
+        singleRect.on('dragmove', updateArrows);
+        multiRects.forEach((rect) => {
+            rect.on('dragmove', updateArrows);
+        });
+
+        // Render the stage initially
+        layer.draw();
+    </script>
+</body>
+
+</html>
