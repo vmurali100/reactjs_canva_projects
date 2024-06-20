@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>REGISTRATION FORM</h1>
+        <form id="registrationForm">
+            <label for="firstName">Name</label>
+            <div class="name-fields">
+                <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+            </div>
+
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="example@email.com" required>
+
+            <label for="phone">Phone</label>
+            <div class="phone-fields">
+                <input type="text" id="areaCode" name="areaCode" placeholder="Area Code" required>
+                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required>
+            </div>
+
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject" required>
+                <option value="" disabled selected>Choose Option</option>
+                <option value="subject1">Subject 1</option>
+                <option value="subject2">Subject 2</option>
+                <option value="subject3">Subject 3</option>
+            </select>
+
+            <div class="existing-customer">
+                <p>Are you an existing customer?</p>
+                <label>
+                    <input type="radio" name="existingCustomer" value="yes" required> Yes
+                </label>
+                <label>
+                    <input type="radio" name="existingCustomer" value="no" required> No
+                </label>
+            </div>
+
+            <button type="submit">REGISTER</button>
+        </form>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>

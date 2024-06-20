@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three-State Checkbox</title>
+    <style>
+        /* Custom styles for the indeterminate state */
+        #threeStateCheckbox.indeterminate::after {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 2px;
+            background-color: black;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <label>
+        <input type="checkbox" id="threeStateCheckbox">
+        Three-State Checkbox
+    </label>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+    const checkbox = document.getElementById('threeStateCheckbox');
+    
+    checkbox.addEventListener('click', () => {
+        if (checkbox.readOnly) {
+            checkbox.checked = checkbox.readOnly = false;
+            checkbox.classList.remove('indeterminate');
+        } else if (!checkbox.checked) {
+            checkbox.readOnly = checkbox.indeterminate = true;
+            checkbox.classList.add('indeterminate');
+        }
+    });
+
+    // Initialize as indeterminate state if desired
+    checkbox.indeterminate = true;
+    checkbox.classList.add('indeterminate');
+});
+
+    </script>
+</body>
+
+</html>

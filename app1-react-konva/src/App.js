@@ -1,16 +1,15 @@
-import React from 'react'
-import ConnectedRectangles from './Components/ConnectedRectangles'
-import OneRect from './Components/OneRect'
-import ConnectableRectangles from './CRectangles'
+import React from "react";
+import ConnectedRectangles from "./Components/ConnectedRectangles";
+import OneRect from "./Components/OneRect";
+import ConnectableRectangles from "./CRectangles";
+import TriStateCheckbox from "./TriStateCheckbox";
 
 const App = () => {
   return (
     <div>
-      {/* <ConnectableRectangles/> */}
-      {/* <OneRect/> */}
-      <ConnectedRectangles/>
+      <TriStateCheckbox />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
